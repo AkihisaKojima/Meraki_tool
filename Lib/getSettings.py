@@ -1,27 +1,18 @@
-import requests
-import pprint
-from collections import defaultdict
+import requests, json
 
-# user specified variables
-apikey = '8f2e0045ccc4a8bb134a3af7c855d65a9a07e2d4'
+BASEURL = 'https://api.meraki.com/api/v0/'
 
-# static variable
-headers = { 'X-Cisco-Meraki-API-Key': apikey, }
-#baseurl = "https://dashboard.meraki.com/api/v0/"
-baseurl = 'https://api.meraki.com/api/v0/'
+def get_org(apikey):
+	headers = { 'X-Cisco-Meraki-API-Key': apikey,
+				'Content-Type': 'application/json' }
+	url = BASEURL + 'organizations'
+	orgs = requests.get(url, headers=headers).json()
 
-# Retrieve organization list which I'm belonging to
-url = baseurl + 'organizations'
-orgs = requests.get(url, headers=headers).json()
-#pprint.pprint(orgs)
+	return orgs
 
-for org in orgs:
-	print(org['name'])
-	print(org['id'])
-	
-	if 'managed' in org['name'].lower():
-		url = baseurl + 'organizations/' + org['id'] + '/devices'
-		devices = requests.get(url, headers=headers).json()
-		pprint.pprint(devices)
-	
-	print('')
+
+def get_net(apikey, org_id):
+	url = baseurl + 'organizations/' + org_id + '/networks'
+	nets = requests.get(url, headers=headers).json()
+
+	return nets

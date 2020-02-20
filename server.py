@@ -1,6 +1,8 @@
 from flask import Flask, request, render_template
 import pprint
 
+from Lib import getSettings
+
 
 app = Flask(__name__)
 
