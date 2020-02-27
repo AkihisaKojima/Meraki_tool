@@ -12,7 +12,9 @@ def get_org(apikey):
 
 
 def get_net(apikey, org_id):
-	url = baseurl + 'organizations/' + org_id + '/networks'
+	headers = { 'X-Cisco-Meraki-API-Key': apikey,
+				'Content-Type': 'application/json' }
+	url = BASEURL + 'organizations/' + org_id + '/networks'
 	nets = requests.get(url, headers=headers).json()
 
 	return nets

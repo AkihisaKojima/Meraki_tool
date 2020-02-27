@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="jp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Meraki tools</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+	</head>
+	<body>
+        <h1>管理ネットワーク一覧</h1>
+        <table border="1">
+			<tr align="center"><td width="200px"><h3>org name</h3></td><td width="300px"><h3>network name</h3></td></tr>
+{{ OrgNet_list | safe }}
+		</table>
+	</body>
+</html>
