@@ -1,2 +1,2 @@
 keys/Meraki_API.txt
-/Lib/__pycache__/*
+Lib/__pycache__/*
