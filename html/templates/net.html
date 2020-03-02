@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Meraki tools</title>
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/net.css') }}">
 	</head>
 
 	<body>
@@ -12,37 +12,71 @@
 
 		<br>
 		<div class="flame">
-
-			<div class="flame_left">
-				<table width="100%">
-					<tr align="center"><td width="150px" class="gray"><h3>カテゴリー</h3></td><td><h3>設定</h3></td></tr>
-
-					<tr><td rowspan="5" valign="top"><h4>ネットワーク全体</h4></td><td>一般</td></tr>
-						<tr></td><td>管理</td></tr>
-						<tr></td><td>アラート</td></tr>
-						<tr></td><td>グループポリシー</td></tr>
-						<tr></td><td>ユーザー</td></tr>
-					<tr><td rowspan="10" valign="top"><h4>セキュリティ＆<br>SD-WAN</h4></td><td>アドレスとVLAN</td></tr>
-						<tr></td><td>DHCP</td></tr>
-						<tr></td><td>ファイアウォール</td></tr>
-						<tr></td><td>サイト間VPN</td></tr>
-						<tr></td><td>クライアントVPN</td></tr>
-						<tr></td><td>Active Directory</td></tr>
-						<tr></td><td>SD-WAN ＆ <br>トラフィックシェーピング</td></tr>
-						<tr></td><td>アクセス制御</td></tr>
-						<tr></td><td>Splashページ</td></tr>
-						<tr></td><td>ワイヤレスコンセントレータ</td></tr>
-					<tr><td rowspan="6" valign="top"><h4>スイッチ</h4></td><td>ルーティングとDHCP</td></tr>
-						<tr><td>ACL</td></tr>
-						<tr><td>アクセスポリシー</td></tr>
-						<tr><td>ポートのスケジュール</td></tr>
-						<tr><td>スイッチポート</td></tr>
-						<tr><td>スイッチの設定</td></tr>
-				</table>
+			<div class="flame_menu">
+				<div>
+					<div class="category"><h3 align="center">カテゴリー</h3></div><div class="item"><h3 align="center">設定</h3></div>
+				</div>
+				<hr>
+				<div>
+					<div class="category"><h4>ネットワーク全体</h4></div>
+						<div class="item">
+							<a href="net/general" target="main">一般</a><br>
+							<a href="net/manage" target="main">管理</a><br>
+							<a href="net/general" target="main">アラート</a><br>
+							<a href="net/general" target="main">グループポリシー</a><br>
+							<a href="net/general" target="main">ユーザー</a><br>
+						</div>
+				</div>
+				<hr>
+				<div>
+					<div class="category"><h4>セキュリティ＆<br>SD-WAN</h4></div>
+						<div class="item">
+							<a href="net/general" target="main">アドレスとVLAN</a><br>
+							<a href="net/general" target="main">DHCP</a><br>
+							<a href="net/general" target="main">ファイアウォール</a><br>
+							<a href="net/general" target="main">サイト間VPN</a><br>
+							<a href="net/general" target="main">クライアントVPN</a><br>
+							<a href="net/general" target="main">Active Directory</a><br>
+							<a href="net/general" target="main">SD-WAN ＆ トラフィックシェーピング</a><br>
+							<a href="net/general" target="main">アクセス制御</a><br>
+						</div>
+				</div>
+				<hr>
+				<div>
+					<div class="category"><h4>スイッチ</h4></div>
+						<div class="item">
+							<a href="net/general" target="main">ルーティングとDHCP</a><br>
+							<a href="net/general" target="main">ACL</a><br>
+							<a href="net/general" target="main">アクセスポリシー</a><br>
+							<a href="net/general" target="main">ポートのスケジュール</a><br>
+							<a href="net/general" target="main">スイッチポート</a><br>
+							<a href="net/general" target="main">スイッチの設定</a><br>
+						</div>
+				</div>
 			</div>
-			<div class="flame_right">
-				aaa
+
+			<div class="flame_main">
+				<br>
+				<iframe id="newframe" onLoad="adjust_frame_css(this.id)"
+						src="net/blank" name="main" frameborder="0" width="100%"></iframe>
 			</div>
 		</div>
 	</body>
+
+
+	<script type="text/javascript">
+		function adjust_frame_css(F){
+			if(document.getElementById(F)) {
+				var myF = document.getElementById(F);
+				var myC = myF.contentWindow.document.documentElement;
+				var myH = 100;
+			if(document.all) {
+				myH  = myC.scrollHeight;
+			} else {
+				myH = myC.offsetHeight;
+			}
+				myF.style.height = myH+"px";
+			}
+		}
+	</script>
 </html>

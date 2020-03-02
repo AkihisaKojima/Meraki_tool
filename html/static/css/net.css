@@ -1,0 +1,33 @@
+.flame{
+	display: table;
+	width: 100%;
+}
+
+.flame_menu{
+	display: table-cell;
+	width: 380px;
+	background-color: #dddddd;
+}
+
+.flame_main{
+	display: table-cell;
+	padding-left: 30px;
+}
+
+.category{
+	display: table-cell;
+	vertical-align: top;
+	width: 150px;
+	padding-left: 10px;
+}
+
+.item{
+	display: table-cell;
+	vertical-align: top;
+	width: 230px;
+	padding-left: 20px;
+}
+
+.gray{
+	background-color: gray
+}
