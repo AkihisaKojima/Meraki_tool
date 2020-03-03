@@ -1,7 +1,32 @@
-.gray{
+.table{
+	display: table;
+	width: 100%;
+}
+
+.table_header{
+	display: table-cell;
+	text-align: center;
 	background-color: gray
 }
 
-table{
-	width: 100%
+.item{
+	display: table-cell;
+	width: 180px;
+}
+
+.value{
+	display: table-cell;
+}
+
+.btn_area{
+	text-align: right;
+	width: 100%;	
+}
+
+.center{
+	text-align: center;
+}
+
+.gray{
+	background-color: gray
 }

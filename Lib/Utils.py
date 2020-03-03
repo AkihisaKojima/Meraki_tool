@@ -69,7 +69,7 @@ def mk_NetGeneral_param(apikey, net_id):
 	mk_NetGeneral_param['TZ_list'] = TZ_list.replace(net['timeZone'], net['timeZone'] +'" selected="selected"')
 
 	syslogs = getSettings.get_syslogs(apikey, net_id)
-	syslog_list = '\n'
+	syslog_list = ''
 	i = 1
 	for syslog in syslogs:
 		checked_flows = ''
@@ -92,15 +92,17 @@ def mk_NetGeneral_param(apikey, net_id):
 			elif str.lower(role) == 'switch event log':
 				cchecked_switch = ' checked="checked"'
 		syslog_list = (syslog_list + 
-			'						<tr><td><input type="text" name="net_syslog_ip_'+ i +'" size="17" maxlength="15" value="'+ syslog['host'] +'"></td>\n'
-			'							<td><input type="text" name="net_syslog_port_'+ i +'" size="10" maxlength="5" value="'+ str(syslog['port']) +'"></td>\n'
-			'							<td><input type="checkbox" name="net_syslog_flows_'+ i +'" value="1"'+ checked_flows +'>Flows\n'
-			'								<input type="checkbox" name="net_syslog_urls_'+ i +'" value="1"'+ checked_urls +'>URLs\n'
-			'								<input type="checkbox" name="net_syslog_appliance_'+ i +'" value="1"'+ checked_appliance +'>Appliance event log\n'
-			'								<input type="checkbox" name="net_syslog_airMarshal_'+ i +'" value="1"'+ checked_airMarshal +'>Air Marshal events\n'
-			'								<input type="checkbox" name="net_syslog_wireless_'+ i +'" value="1"'+ checked_wireless +'>Wireless event log\n'
-			'								<input type="checkbox" name="net_syslog_switch_'+ i +'" value="1"'+ cchecked_switch +'>Switch event log\n'
-			'								</td></tr>\n')
+			'						<div><div class="value"><input type="text" name="net_syslog_ip_'+ str(i) +'" size="17" maxlength="15" value="'+ syslog['host'] +'"></div>\n'
+			'							<div class="value"><input type="text" name="net_syslog_port_'+ str(i) +'" size="10" maxlength="5" value="'+ str(syslog['port']) +'"></div>\n'
+			'							<div class="value"><input type="checkbox" name="net_syslog_flows_'+ str(i) +'" value="1"'+ checked_flows +'>Flows\n'
+			'								<input type="checkbox" name="net_syslog_urls_'+ str(i) +'" value="1"'+ checked_urls +'>URLs\n'
+			'								<input type="checkbox" name="net_syslog_appliance_'+ str(i) +'" value="1"'+ checked_appliance +'>Appliance event log\n'
+			'								<input type="checkbox" name="net_syslog_airMarshal_'+ str(i) +'" value="1"'+ checked_airMarshal +'>Air Marshal events\n'
+			'								<input type="checkbox" name="net_syslog_wireless_'+ str(i) +'" value="1"'+ checked_wireless +'>Wireless event log\n'
+			'								<input type="checkbox" name="net_syslog_switch_'+ str(i) +'" value="1"'+ cchecked_switch +'>Switch event log\n'
+			'								</div>\n'
+			'							<div class="value"><input id="del_btn_'+ str(i) +'" type="button" value="削除" onclick="del_btn(this)"/></div></div>\n')
+
 		i += 1
 
 	mk_NetGeneral_param['syslog_list'] = syslog_list
@@ -108,9 +110,33 @@ def mk_NetGeneral_param(apikey, net_id):
 	return mk_NetGeneral_param
 
 
-def mk_NetManage_param(apikey, org_id):
-	mk_NetGeneral_param = {}
+def mk_NetAdmin_param(apikey, org_id, net_id):
+	mk_NetAdmin_param = {}
 
-	net = getSettings.get_net(apikey, net_id)
+	admins = getSettings.get_admins(apikey, org_id)
 
-	return mk_NetManage_param
+	admin_list = '\n'
+	i = 0
+	for admin in admins:
+		for net in admin['networks']:
+			if net['id'] == net_id:
+				if net['access'] == 'full':
+					select_option = '<option value="full" selected>full</option><option value="read-only">read-only</option><option value="enterprise">enterprise</option><option value="none">none</option>'
+				elif net['access'] == 'read-only':
+					select_option = '<option value="full">full</option><option value="read-only" selected>read-only</option><option value="enterprise">enterprise</option><option value="none">none</option>'
+				elif net['access'] == 'enterprise':
+					select_option = '<option value="full">full</option><option value="read-only">read-only</option><option value="enterprise" selected>enterprise</option><option value="none">none</option>'
+				elif net['access'] == 'none':
+					select_option = '<option value="full">full</option><option value="read-only">read-only</option><option value="enterprise">enterprise</option><option value="none" selected>none</option>'
+
+				admin_list = (admin_list + 
+					'						<tr><td><input type="text" name="net_username_'+ str(i) +'" value="'+ admin['name'] +'"></td>\n'
+					'							<td><input type="text" name="net_mail_'+ str(i) +'" value="'+ admin['email'] +'"></td>\n'
+					'							<td><input type="text" name="net_status_'+ str(i) +'" value="'+ admin['accountStatus'] +'"></td>\n'
+					'							<td><select name="net_access_'+ str(i) +'">'+ select_option +'</select></td>\n'
+					'							<td><input id="del_btn_'+ str(i) +'" type="button" value="削除" onclick="del_btn(this)"/></td></tr>\n')
+				i += 1
+
+	mk_NetAdmin_param['admin_list'] = admin_list
+
+	return mk_NetAdmin_param

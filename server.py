@@ -73,10 +73,10 @@ def net_general(file_name):
 			Network_id=net_id, Network_name=param['net_name'], TZ_list=param['TZ_list'], syslog_list=param['syslog_list'])
 #		return render_template('net_general.html', Network_id=net_id, Network_name=net_id, TZ_list=net_id)
 
-	elif file_name == 'manage':
-		param = Utils.mk_NetGeneral_param(api_key, net_id)
-		return render_template('net_manage.html',
-			Network_id=net_id, Network_name=param['net_name'], TZ_list=param['TZ_list'], syslog_list=param['syslog_list'])
+	elif file_name == 'admin':
+		param = Utils.mk_NetAdmin_param(api_key, org_id, net_id)
+		return render_template('net_admin.html',
+			Network_id=net_id, admin_list=param['admin_list'])
 	else:
 		return render_template('blank.html')
 

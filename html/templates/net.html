@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title>Meraki tools</title>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/net.css') }}">
+		<script type="text/javascript" src="{{ url_for('static', filename='js/net.js') }}"></script>
 	</head>
 
 	<body>
@@ -14,16 +15,15 @@
 		<div class="flame">
 			<div class="flame_menu">
 				<div>
-					<div class="category"><h3 align="center">カテゴリー</h3></div><div class="item"><h3 align="center">設定</h3></div>
+					<div class="category center"><h3>カテゴリー</h3></div><div class="item"><h3 align="center">設定</h3></div>
 				</div>
 				<hr>
 				<div>
 					<div class="category"><h4>ネットワーク全体</h4></div>
 						<div class="item">
 							<a href="net/general" target="main">一般</a><br>
-							<a href="net/manage" target="main">管理</a><br>
+							<a href="net/admin" target="main">管理</a><br>
 							<a href="net/general" target="main">アラート</a><br>
-							<a href="net/general" target="main">グループポリシー</a><br>
 							<a href="net/general" target="main">ユーザー</a><br>
 						</div>
 				</div>
@@ -53,6 +53,7 @@
 							<a href="net/general" target="main">スイッチの設定</a><br>
 						</div>
 				</div>
+
 			</div>
 
 			<div class="flame_main">
@@ -63,20 +64,4 @@
 		</div>
 	</body>
 
-
-	<script type="text/javascript">
-		function adjust_frame_css(F){
-			if(document.getElementById(F)) {
-				var myF = document.getElementById(F);
-				var myC = myF.contentWindow.document.documentElement;
-				var myH = 100;
-			if(document.all) {
-				myH  = myC.scrollHeight;
-			} else {
-				myH = myC.offsetHeight;
-			}
-				myF.style.height = myH+"px";
-			}
-		}
-	</script>
 </html>

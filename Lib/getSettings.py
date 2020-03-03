@@ -29,6 +29,15 @@ def get_net(apikey, net_id):
 	return net
 
 
+def get_admins(apikey, org_id):
+	headers = { 'X-Cisco-Meraki-API-Key': apikey,
+				'Content-Type': 'application/json' }
+	url = BASEURL + '/organizations/' + org_id + '/admins'
+	admins = requests.get(url, headers=headers).json()
+
+	return admins
+
+
 def get_syslogs(apikey, net_id):
 	headers = { 'X-Cisco-Meraki-API-Key': apikey,
 				'Content-Type': 'application/json' }
