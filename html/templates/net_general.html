@@ -3,8 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Meraki tools</title>
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/net_general.css') }}">
-		<script type="text/javascript" src="{{ url_for('static', filename='js/net.js') }}"></script>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/net.css') }}">
 		<script type="text/javascript" src="{{ url_for('static', filename='js/net_general.js') }}"></script>
 	</head>
 
@@ -12,10 +11,11 @@
 		<form method="post" name="net_gen" action="/net/general">
 			<h1>一般</h1>
 			<div class="table">
-				<div>
-					<div class="item">ネットワーク名</div><div class="value"><input type="text" name="net_name" size="50" maxlength="50" value="{{Network_name}}"></div>
+				<div class="table_row">
+					<div class="item">ネットワーク名</div>
+					<div class="value"><input type="text" name="net_name" size="50" maxlength="50" value="{{Network_name}}"></div>
 				</div>
-				<div>
+				<div class="table_row">
 					<div class="item">ローカルタイムゾーン</div>
 					<div class="value"><select name="net_time">{{TZ_list | safe}}</select></div>
 				</div>
@@ -24,25 +24,32 @@
 			<hr>
 			<h1>レポーティング</h1>
 			<div class="table">
-				<div>
+				<div class="table_row">
 					<div class="item">syslogサーバ</div>
-						<div class="value">
-							<div class="table" id="syslogs">
-								<div><div class="table_header" style="width:150px">サーバIP</div><div class="table_header" style="width:100px">ポート番号</div><div class="table_header">ロール</div><div class="table_header" style="width:100px"></div></div>
-								{{syslog_list | safe}}
+					<div class="value">
+						<div class="table" id="syslogs">
+							<div class="table_row">
+								<div class="table_header" style="width:150px">サーバIP</div>
+								<div class="table_header" style="width:100px">ポート番号</div>
+								<div class="table_header">ロール</div>
+								<div class="table_header" style="width:120px"></div>
 							</div>
+								{{syslog_list | safe}}
 						</div>
-					<div>
+						<div class="btn_area"><input id="add_btn" type="button" value="サーバ追加"/></div>
+					</div>
 				</div>
-				<div class="btn_area"><input id="add_btn" type="button" value="サーバ追加"/></div>
-				<div>
+				<br>
+				<div class="table_row">
 					<div class="item">NetFlowトラフィックレポート</div>
 					<div class="value">
 						<div class="table">
-							<div>
-								<div class="table_header">有効/無効</div><div class="table_header">NetFlowコレクタIP</div><div class="table_header">NetFlowコレクタポート</div>
+							<div class="table_row">
+								<div class="table_header">有効/無効</div>
+								<div class="table_header">NetFlowコレクタIP</div>
+								<div class="table_header">NetFlowコレクタポート</div>
 							</div>
-							<div>
+							<div class="table_row">
 								<div class="value"><input type="checkbox" name="net_netflow_on" value="1">有効化</div>
 								<div class="value"><input type="text" name="net_netflow_ip" value=""></div>
 								<div class="value"><input type="text" name="net_netflow_port" value=""></div>

@@ -45,3 +45,12 @@ def get_syslogs(apikey, net_id):
 	syslogs = requests.get(url, headers=headers).json()
 
 	return syslogs
+
+
+def get_alert(apikey, net_id):
+	headers = { 'X-Cisco-Meraki-API-Key': apikey,
+				'Content-Type': 'application/json' }
+	url = BASEURL + 'networks/' + net_id + '/networks/' + net_id + '/alertSettings'
+	alert = requests.get(url, headers=headers).json()
+
+	return alert

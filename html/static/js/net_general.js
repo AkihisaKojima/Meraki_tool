@@ -5,10 +5,12 @@ window.onload = function() {
     add_btn.onclick = function(){
 
         var table = document.getElementById('syslogs');
+
         var table_tr = document.createElement('div');
+        table_tr.setAttribute('class','table_row');    
         table.appendChild(table_tr);
         var cell_1 = document.createElement('div');
-        cell_1.setAttribute('class','value')
+        cell_1.setAttribute('class','value border_bottom');
 
         var input_1 = document.createElement('input');
         input_1.setAttribute('type','text');
@@ -19,7 +21,7 @@ window.onload = function() {
         cell_1.appendChild(input_1);
 
         var cell_2 = document.createElement('div');
-        cell_2.setAttribute('class','value')
+        cell_2.setAttribute('class','value border_bottom');
         var input_2 = document.createElement('input');
         input_2.setAttribute('type','text');
         input_2.setAttribute('name','net_syslog_port_n'+i);
@@ -29,7 +31,7 @@ window.onload = function() {
         cell_2.appendChild(input_2);
 
         var cell_3 = document.createElement('div');
-        cell_3.setAttribute('class','value')
+        cell_3.setAttribute('class','value border_bottom');
         var input_31 = document.createElement('input');
         input_31.setAttribute('type','checkbox');
         input_31.setAttribute('name','net_syslog_flows_n'+ i);
@@ -73,12 +75,18 @@ window.onload = function() {
         cell_3.appendChild(document.createTextNode('Switch event log\n'));
 
         var cell_4 = document.createElement('div');
-        cell_4.setAttribute('class','value')
+        cell_4.setAttribute('class','value border_bottom');
         var input_4 = document.createElement('input');
         input_4.setAttribute('type','button');
         input_4.setAttribute('value','キャンセル');
         input_4.setAttribute('onclick','del_btn(this)');
         cell_4.appendChild(input_4);
+
+        table_tr.appendChild(cell_1);
+        table_tr.appendChild(cell_2);
+        table_tr.appendChild(cell_3);
+        table_tr.appendChild(cell_4);
+
 
         i += 1;
     }
@@ -86,7 +94,7 @@ window.onload = function() {
 
 
 function del_btn(btn) {
-    var table_tr = (btn.parentNode).parentNode;
-    table_tr.parentNode.deleteRow(table_tr.sectionRowIndex);
+    var table_tr = btn.parentNode.parentNode;
+    table_tr.remove();
 }
 

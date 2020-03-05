@@ -14,18 +14,51 @@
 	padding-left: 30px;
 }
 
-.category{
+.category_l{
 	display: table-cell;
 	vertical-align: top;
 	width: 150px;
 	padding-left: 10px;
 }
 
-.item{
+.category_m{
 	display: table-cell;
 	vertical-align: top;
 	width: 230px;
 	padding-left: 20px;
+}
+
+.table{
+	display: table;
+	width: 100%;
+}
+
+.table_header{
+	display: table-cell;
+	text-align: center;
+	background-color: gray
+}
+
+.table_row{
+	display: table-row;
+	width: 100%;
+}
+
+.item{
+	display: table-cell;
+	width: 180px;
+}
+
+.value{
+	display: table-cell;
+}
+
+.btn_area{
+	text-align: left;
+}
+
+.border_bottom{
+	border-bottom: solid 1px #cccccc;
 }
 
 .center{

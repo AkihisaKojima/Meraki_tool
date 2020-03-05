@@ -3,20 +3,31 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Meraki tools</title>
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/net_admin.css') }}">
-		<script type="text/javascript" src="{{ url_for('static', filename='js/net.js') }}"></script>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/net.css') }}">
 		<script type="text/javascript" src="{{ url_for('static', filename='js/net_admin.js') }}"></script>
 	</head>
 
 	<body>
 		<form method="post" name="net_adm" action="/net/admin">
 			<h1>管理</h1>
-			<table>
-				<tr><td width="200px">NW管理者一覧</td>
-					<td><table id="admin"><tr><td class="gray" align="center" width="200px">ユーザー名</td><td class="gray" align="center" width="400px">メールアドレス</td><td class="gray" align="center" width="150px">ステータス</td><td class="gray" align="center" width="130px">権限</td><td class="gray" align="center" width="100px"></td></tr>{{admin_list | safe}}
-						</table></td></tr>
-					<tr><td></td><td align="right"><input id="add_btn" type="button" value="ユーザー追加"/><br></td></tr>
-			</table>
+			<div class="table">
+				<div class="table_tr">
+					<div class="item">NW管理者一覧</div>
+					<div class="value">
+						<div class="table" id="admin">
+							<div class="table_row">
+								<div class="table_header" style="width:200px">ユーザー名</div>
+								<div class="table_header" style="width:400px">メールアドレス</div>
+								<div class="table_header" style="width:150px">ステータス</div>
+								<div class="table_header" style="width:130px">権限</div>
+								<div class="table_header" style="width:120px"></div>
+							</div>
+							{{admin_list | safe}}
+						</div>
+						<div class="btn_area"><input id="add_btn" type="button" value="ユーザ追加"/></div>	
+					</div>
+				</div>
+			</div>
 
 			<input type="hidden" name="net_id" value="{{Network_id}}">
 		</form>

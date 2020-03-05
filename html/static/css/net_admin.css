@@ -1,3 +1,40 @@
+.table{
+	display: table;
+	width: 100%;
+}
+
+.table_header{
+	display: table-cell;
+	text-align: center;
+	background-color: gray
+}
+
+.table_row{
+	display: table-row;
+	width: 100%;
+}
+
+.item{
+	display: table-cell;
+	width: 180px;
+}
+
+.value{
+	display: table-cell;
+}
+
+.btn_area{
+	text-align: left;
+}
+
+.center{
+	text-align: center;
+}
+
+.border_bottom{
+	border-bottom: solid 1px #cccccc;
+}
+
 .gray{
 	background-color: gray
 }

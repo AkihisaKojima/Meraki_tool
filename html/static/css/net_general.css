@@ -9,6 +9,11 @@
 	background-color: gray
 }
 
+.table_row{
+	display: table-row;
+	width: 100%;
+}
+
 .item{
 	display: table-cell;
 	width: 180px;
@@ -19,12 +24,15 @@
 }
 
 .btn_area{
-	text-align: right;
-	width: 100%;	
+	text-align: left;
 }
 
 .center{
 	text-align: center;
+}
+
+.border_bottom{
+	border-bottom: solid 1px #cccccc;
 }
 
 .gray{

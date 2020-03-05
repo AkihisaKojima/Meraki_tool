@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="jp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Meraki tools</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/net.css') }}">
+		<script type="text/javascript" src="{{ url_for('static', filename='js/net_alert.js') }}"></script>
+	</head>
+
+	<body>
+		<form method="post" name="net_alert" action="/net/alert">
+			<h1>アラート設定</h1>
+			<div class="table">
+				<div class="table_row">
+					<div class="item">アラート受信者</div>
+					<div class="value"><textarea name="net_alert_admin_name">{{net_alert_admin_name}}</textarea></div>
+				</div>
+			</div>
+
+			<hr>
+			<div class="table">
+				<div class="table_row">
+					<div class="item">ネットワーク全体</div>
+					<div class="value">
+						<input type="checkbox" name="net_alert_ch_setting" value="1" {{net_alert_ch_setting}}>設定が変更された時<br>
+						<input type="checkbox" name="net_alert_ch_vpnconnect" value="1" {{net_alert_ch_vpnconnect}}>VPN接続がアップ/ダウンした時<br>
+						<input type="checkbox" name="net_alert_dt_marAP" value="1" {{net_alert_dt_marAP}}>不正APが検出された時<br>
+						<input type="checkbox" name="net_alert_dt_trafficover" value="1" {{net_alert_dt_trafficover}}>ネットワーク使用量が閾値を超えた場合<br>
+						<div class="value" style="padding-left: 30px">
+							<input type="text" name="th_traffic" value=" {{th_traffic}}">
+							<select name="th_traffic_unit"><option value="k" {{th_traffic_unit_k}}>KB</option><option value="m" {{th_traffic_unit_m}}>MB</option><option value="g" {{th_traffic_unit_g}}>GB</option><option value="t" {{th_traffic_unit_t}}>TB</option></select>
+							期間
+							<select name="th_period"><option value="20m" {{th_period_20m}}>20分</option><option value="4h" {{th_period_4h}}>4時間</option><option value="1d" {{th_period_1d}}>1日</option></select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+
+			<hr>
+			<div class="table">
+				<div class="table_row">
+					<div class="item">ワイヤレス</div>
+					<div class="value">
+						<input type="checkbox" name="net_alert_dt_apdown" value="1" {{net_alert_dt_apdown}}>ゲートウェイAPがオフラインになった時 閾値：
+							<select name="th_apduwn"><option value="5" {{th_apduwn_5}}>5分</option><option value="10" {{th_apduwn_10}}>10分</option><option value="15" {{th_apduwn_15}}>15分</option><option value="30" {{th_apduwn_30}}>30分</option><option value="60" {{th_apduwn_60}}>60分</option></select><br>
+						<input type="checkbox" name="net_alert_dt_repeaterdown" value="1" {{net_alert_dt_repeaterdown}}>リピーターがオフラインになった時 閾値：
+							<select name="th_repeaterduwn"><option value="5" {{th_repeaterduwn_5}}>5分</option><option value="10" {{th_repeaterduwn_10}}>10分</option><option value="15" {{th_repeaterduwn_15}}>15分</option><option value="30" {{th_repeaterduwn_30}}>30分</option><option value="60" {{th_repeaterduwn_60}}>60分</option></select><br>
+						<input type="checkbox" name="net_alert_ch_gateway" value="1" {{net_alert_ch_gateway}}>ゲートウェイがリピーターになった時
+					</div>
+				</div>
+			</div>
+			<br>
+
+			<hr>
+			<div class="table">
+				<div class="table_row">
+					<div class="item">セキュリティアプライアンス</div>
+					<div class="value">
+						<input type="checkbox" name="net_alert_dt_mxdown" value="1" {{net_alert_dt_mxdown}}>セキュリティアプライアンスがオフラインになった時<br>
+						<input type="checkbox" name="net_alert_ch_uplink" value="1" {{net_alert_ch_uplink}}>プライマリアップリンクのステータスが変化した時<br>
+						<input type="checkbox" name="net_alert_dt_dhcperr" value="1" {{net_alert_dt_dhcperr}}>DHCPのリソースプールが枯渇した時<br>
+						<input type="checkbox" name="net_alert_dt_ipcollision" value="1" {{net_alert_dt_ipcollision}}>IPの競合が検出された時<br>
+						<input type="checkbox" name="net_alert_dt_mardhcp" value="1" {{net_alert_dt_mardhcp}}>意図しないDHCPサーバが検出された時<br>
+						<input type="checkbox" name="net_alert_dt_failover" value="1" {{net_alert_dt_failover}}>ワームスペアのフェールオーバが発生した時<br>
+						<input type="checkbox" name="net_alert_dt_client" value="1" {{net_alert_dt_client}}>特定クライアントがLANに接続もしくは切断された時<br>
+							<div class="value" style="vertical-align: top; padding-left: 30px">追跡するクライアント：</div>
+							<div class="value"><textarea name="dt_client" cols="40"> {{dt_client}}</textarea></div>
+					</div>
+				</div>
+			</div>
+			<br>
+
+			<hr>
+			<div class="table">
+				<div class="table_row">
+					<div class="item">スイッチ</div>
+					<div class="value">
+						<input type="checkbox" name="net_alert_dt_msdown" value="1" {{net_alert_dt_msdown}}>スイッチがオフラインになった時 閾値：
+							<select name="th_msdown"><option value="5" {{th_msdown_5}}>5分</option><option value="10" {{th_msdown_10}}>10分</option><option value="15" {{th_msdown_15}}>15分</option><option value="30" {{th_msdown_30}}>30分</option><option value="60" {{th_msdown_60}}>60分</option></select><br>
+						<input type="checkbox" name="net_alert_dt_dhcp" value="1" {{net_alert_dt_dhcp}}>新しいDHCPサーバがネットワーク上で検出された時<br>
+						<input type="checkbox" name="net_alert_dt_portdown" value="1" {{net_alert_dt_portdown}}>任意のポートがオフラインになった時 閾値：
+							<select name="th_portdown"><option value="5" {{th_portdown_5}}>5分</option><option value="10" {{th_portdown_10}}>10分</option><option value="15" {{th_portdown_15}}>15分</option><option value="30" {{th_portdown_30}}>30分</option><option value="60" {{th_portdown_60}}>60分</option></select><br>
+						<input type="checkbox" name="net_alert_dt_cableerr" value="1" {{net_alert_dt_cableerr}}>任意のポートがケーブルエラーを検知した時<br>
+						<input type="checkbox" name="net_alert_ch_linkspeed" value="1" {{net_alert_ch_linkspeed}}>任意のポートのリンクスピードが変化した時<br>
+						<input type="checkbox" name="net_alert_dt_nopower" value="1" {{net_alert_dt_nopower}}>電源が失われた時<br>
+						<input type="checkbox" name="net_alert_dt_redundantpower" value="1" {{net_alert_dt_redundantpower}}>冗長電源装置がスイッチに電力を供給している時<br>
+						<input type="checkbox" name="net_alert_dt_udld" value="1" {{net_alert_dt_udld}}>単方向リンク検出(UDLD)エラーがポートに発生した時<br>
+						<input type="checkbox" name="net_alert_dt_hightemp" value="1" {{net_alert_dt_hightemp}}>スイッチが危険な温度で動作している時
+					</div>
+				</div>
+			</div>
+			<br>
+
+			<hr>
+			<div class="table">
+				<div class="table_row">
+					<div class="item">Webhooks<br>HTTPサーバ</div>
+					<div class="value">
+						<div class="table" id="webhook">
+							<div class="table_row">
+								<div class="table_header" style="width:150px">サーバ名</div>
+								<div class="table_header">URL</div>
+								<div class="table_header" style="width:150px">key</div>
+								<div class="table_header" style="width:120px"></div>
+								<div class="table_header" style="width:120px"></div>
+							</div>
+							{{webhook_list | safe}}
+						</div>
+						<div class="btn_area"><input id="add_btn" type="button" value="サーバ追加"/></div>
+					</div>
+				</div>
+			</div>
+
+			<input type="hidden" name="net_id" value="{{Network_id}}">
+		</form>
+	</body>
+</html>
